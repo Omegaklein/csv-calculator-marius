@@ -51,6 +51,16 @@ def calculate_average_price(sales_data: List[Dict[str, str]]) -> Dict[str, float
     }
 
 
+def calculate_top_product_by_total_sales(sales_data: List[Dict[str, str]]) -> Dict[str, float]:
+    total_sales = calculate_total_sales(sales_data)
+
+    if not total_sales:
+        return {}
+
+    top_product = max(total_sales, key=total_sales.get)
+    return {top_product: total_sales[top_product]}
+
+
 def display_results(results: Dict[str, float], title: str) -> None:
     print(f"\n{title}")
     for product, value in results.items():
@@ -70,3 +80,6 @@ display_results(total_quantity, "Total Quantity Sold per Product")
 
 average_price = calculate_average_price(sales_data)
 display_results(average_price, "Average Price per Product")
+
+top_product = calculate_top_product_by_total_sales(sales_data)
+display_results(top_product, "Top Product by Total Sales Value")
